@@ -577,13 +577,17 @@ h2 {
   height: 100%;
   object-fit: cover;
   object-position: center;
-  opacity: .36;
+  opacity: .60;
 }
 
 .hero::after {
   position: absolute;
   inset: 0;
-  background: linear-gradient(180deg, rgba(30,17,25,.35), rgba(30,17,25,.8));
+  background: linear-gradient(
+    180deg,
+    rgba(30,17,25,.10),
+    rgba(30,17,25,.35)
+  );
   content: "";
 }
 
@@ -596,16 +600,6 @@ h2 {
   outline: 1px solid rgba(255,252,247,.35);
   outline-offset: 10px;
   border-radius: 170px 170px 12px 12px / 100px 100px 12px 12px;
-}
-
-.hero-frame::before {
-  position: absolute;
-  top: 25px;
-  right: 18px;
-  left: 18px;
-  height: 1px;
-  background: rgba(255,252,247,.4);
-  content: "";
 }
 
 .hero-frame::after {
@@ -664,7 +658,6 @@ h2 {
   font-size: 12px;
   line-height: 2;
 }
-
 /* MENSAJE DE BIENVENIDA */
 
 .intro {
