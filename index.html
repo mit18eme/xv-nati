@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <meta name="theme-color" content="#F8F2E8">
 <meta name="description" content="Acompaña a Natali Gissel a celebrar sus XV años. Una noche de tradición, familia y alegría al estilo Cielito Lindo.">
 <title>XV años de Natali Gissel | Cielito Lindo</title>
@@ -26,9 +26,7 @@
   --page: 1100px;
 }
 
-* {
-  box-sizing: border-box;
-}
+* { box-sizing: border-box; }
 
 html {
   scroll-behavior: smooth;
@@ -45,27 +43,14 @@ body {
   overflow-x: hidden;
 }
 
-body.envelope-open {
-  overflow: auto;
-}
+body.envelope-open { overflow: auto; }
 
-img {
-  display: block;
-  max-width: 100%;
-}
+img { display: block; max-width: 100%; }
 
-a {
-  color: inherit;
-}
+a { color: inherit; }
 
-button,
-a {
-  -webkit-tap-highlight-color: transparent;
-}
-
-button {
-  font: inherit;
-}
+button, a { -webkit-tap-highlight-color: transparent; }
+button { font: inherit; }
 
 section {
   position: relative;
@@ -88,16 +73,9 @@ section {
   color: var(--taupe);
 }
 
-h1,
-h2,
-h3,
-p {
-  overflow-wrap: break-word;
-}
+h1, h2, h3, p { overflow-wrap: break-word; }
 
-h1,
-h2,
-h3 {
+h1, h2, h3 {
   font-family: var(--serif);
   font-weight: 500;
   line-height: 1.05;
@@ -113,9 +91,7 @@ h3 {
   font-size: 1.8rem;
 }
 
-p {
-  margin: 0 0 14px;
-}
+p { margin: 0 0 14px; }
 
 .section-heading {
   max-width: 650px;
@@ -140,8 +116,7 @@ p {
   font-size: 21px;
 }
 
-.ornament::before,
-.ornament::after {
+.ornament::before, .ornament::after {
   content: "";
   width: 38px;
   height: 1px;
@@ -173,14 +148,8 @@ p {
   transform: translateY(-2px);
 }
 
-.btn-outline {
-  background: transparent;
-  color: var(--coffee);
-}
-
-.btn-outline:hover {
-  color: var(--white);
-}
+.btn-outline { background: transparent; color: var(--coffee); }
+.btn-outline:hover { color: var(--white); }
 
 .btn-light {
   border-color: var(--sand);
@@ -188,47 +157,57 @@ p {
   color: var(--coffee);
 }
 
-.btn-light:hover {
-  background: var(--cream);
-  color: var(--coffee);
-}
+.btn-light:hover { background: var(--cream); color: var(--coffee); }
 
-/* SOBRE DE ENTRADA */
+/* ==========================================
+   PANTALLA INICIAL: SOBRE DE LUJO
+   ========================================== */
+
+body:not(.envelope-open) {
+  overflow: hidden;
+}
 
 .envelope-intro {
   position: fixed;
   z-index: 1000;
   inset: 0;
-  display: grid;
-  place-items: center;
-  overflow: hidden;
-  padding: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow-x: hidden;
+  overflow-y: auto;
+  padding:
+    max(34px, env(safe-area-inset-top))
+    max(22px, env(safe-area-inset-right))
+    max(34px, env(safe-area-inset-bottom))
+    max(22px, env(safe-area-inset-left));
   background:
-    radial-gradient(ellipse at 50% 35%, rgba(255,252,247,.98), transparent 48%),
-    linear-gradient(145deg, #F8F2E8 0%, #E9DCC9 52%, #D6C2A5 100%);
+    radial-gradient(ellipse at 50% 37%, rgba(255,252,247,.98) 0%, rgba(255,252,247,.64) 30%, transparent 65%),
+    radial-gradient(ellipse at 8% 95%, rgba(190,157,118,.25), transparent 43%),
+    radial-gradient(ellipse at 95% 5%, rgba(190,157,118,.22), transparent 42%),
+    linear-gradient(135deg, #FBF7F0 0%, #F0E5D4 48%, #E2CFB4 100%);
   opacity: 1;
   visibility: visible;
-  transition: opacity 1s ease, visibility 1s ease;
-}
-
-.envelope-intro::before,
-.envelope-intro::after {
-  content: "✧";
-  position: absolute;
-  color: rgba(116,84,59,.35);
-  font-family: var(--serif);
-  font-size: 32px;
-  pointer-events: none;
+  transition: opacity .9s ease, visibility .9s ease;
+  isolation: isolate;
 }
 
 .envelope-intro::before {
-  top: 9%;
-  left: 12%;
+  content: "";
+  position: absolute;
+  z-index: -1;
+  inset: 14px;
+  border: 1px solid rgba(116,84,59,.42);
+  pointer-events: none;
 }
 
 .envelope-intro::after {
-  right: 12%;
-  bottom: 9%;
+  content: "";
+  position: absolute;
+  z-index: -1;
+  inset: 20px;
+  border: 1px solid rgba(116,84,59,.16);
+  pointer-events: none;
 }
 
 .envelope-intro.is-hidden {
@@ -239,34 +218,51 @@ p {
 
 .envelope-scene {
   position: relative;
-  width: min(100%, 490px);
+  width: min(100%, 620px);
+  margin: auto;
+  padding: clamp(12px, 3vh, 28px) 0;
   text-align: center;
   cursor: pointer;
-  -webkit-tap-highlight-color: transparent;
   outline: none;
+  -webkit-tap-highlight-color: transparent;
+  animation: scene-arrive 1s ease both;
 }
 
 .envelope-scene:focus-visible {
-  outline: 2px solid var(--leather);
-  outline-offset: 14px;
+  outline: 1px solid var(--leather);
+  outline-offset: 12px;
 }
 
 .envelope-kicker {
-  margin: 0 0 26px;
+  margin: 0 0 clamp(24px, 4vh, 42px);
   color: var(--leather);
   font-size: 9px;
   font-weight: 600;
-  letter-spacing: 3.5px;
+  letter-spacing: clamp(2px, .6vw, 4px);
+  line-height: 1.8;
   text-transform: uppercase;
 }
 
+.envelope-kicker::before,
+.envelope-kicker::after {
+  content: "✧";
+  display: inline-block;
+  margin: 0 13px;
+  color: #B08D65;
+  font-size: 12px;
+  vertical-align: 1px;
+}
+
+/* El sobre crece sin deformarse y mantiene su proporción */
+
 .envelope {
   position: relative;
-  width: min(100%, 390px);
-  height: 270px;
+  width: min(100%, 440px);
+  height: auto;
+  aspect-ratio: 1.52 / 1;
   margin: 0 auto;
-  perspective: 1200px;
-  filter: drop-shadow(0 24px 24px rgba(73,51,38,.18));
+  perspective: 1400px;
+  filter: drop-shadow(0 24px 25px rgba(73,51,38,.2));
   animation: envelope-arrive 1.2s cubic-bezier(.2,.8,.2,1) both;
 }
 
@@ -274,65 +270,84 @@ p {
   position: absolute;
   inset: 0;
   overflow: hidden;
-  border: 1px solid rgba(116,84,59,.4);
+  border: 1px solid rgba(116,84,59,.55);
   background:
-    linear-gradient(145deg, #F8F0E4, #DCC7A9);
+    linear-gradient(135deg, rgba(255,252,247,.5), transparent 35%),
+    linear-gradient(145deg, #F1E3CE 0%, #D5BB97 100%);
 }
 
 .envelope-back::before {
   content: "";
   position: absolute;
-  inset: 12px;
-  border: 1px solid rgba(116,84,59,.34);
+  inset: 10px;
+  border: 1px solid rgba(116,84,59,.42);
 }
 
 .envelope-back::after {
   content: "";
   position: absolute;
-  inset: 19px;
-  border: 1px solid rgba(116,84,59,.14);
+  inset: 16px;
+  border: 1px solid rgba(116,84,59,.2);
 }
+
+/* Tarjeta interior más amplia */
 
 .envelope-card {
   position: absolute;
   z-index: 2;
-  top: 12px;
-  left: 9%;
+  top: 5%;
+  left: 8%;
   display: flex;
-  width: 82%;
-  height: 245px;
+  width: 84%;
+  height: 90%;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 18px;
-  border: 1px solid rgba(116,84,59,.5);
-  outline: 1px solid rgba(116,84,59,.2);
+  padding: clamp(16px, 4%, 28px);
+  overflow: hidden;
+  border: 1px solid rgba(116,84,59,.55);
+  outline: 1px solid rgba(116,84,59,.22);
   outline-offset: -7px;
-  background: var(--white);
-  box-shadow: 0 4px 14px rgba(73,51,38,.1);
+  background:
+    radial-gradient(ellipse at 50% 0%, rgba(214,194,165,.16), transparent 60%),
+    var(--white);
+  box-shadow: 0 6px 20px rgba(73,51,38,.12);
   transition: transform 1s cubic-bezier(.2,.75,.2,1);
 }
 
+.envelope-card::before,
+.envelope-card::after {
+  content: "✧";
+  position: absolute;
+  color: rgba(116,84,59,.48);
+  font-family: var(--serif);
+  font-size: 16px;
+}
+
+.envelope-card::before { top: 13px; left: 16px; }
+.envelope-card::after { right: 16px; bottom: 13px; }
+
 .card-top-ornament {
-  margin-bottom: 12px;
+  margin-bottom: clamp(7px, 1.5vh, 15px);
   color: var(--leather);
   font-family: var(--serif);
-  font-size: 21px;
+  font-size: clamp(18px, 3.2vw, 25px);
   letter-spacing: 6px;
+  line-height: 1.2;
 }
 
 .card-small {
   color: var(--taupe);
-  font-size: 8px;
-  letter-spacing: 2px;
+  font-size: clamp(7px, 1.5vw, 9px);
+  letter-spacing: clamp(1px, .3vw, 2.5px);
   text-transform: uppercase;
 }
 
 .card-title {
-  margin-top: 5px;
+  margin-top: 7px;
   color: var(--coffee);
   font-family: var(--serif);
-  font-size: 29px;
+  font-size: clamp(24px, 5vw, 35px);
   line-height: 1.1;
 }
 
@@ -340,17 +355,17 @@ p {
   margin-top: 3px;
   color: var(--leather);
   font-family: var(--serif);
-  font-size: clamp(30px, 8vw, 43px);
+  font-size: clamp(30px, 7vw, 49px);
   font-style: italic;
-  line-height: 1.1;
+  line-height: 1.08;
 }
 
 .card-divider {
   display: flex;
-  width: 80%;
+  width: 78%;
   align-items: center;
   gap: 10px;
-  margin: 12px 0 8px;
+  margin: clamp(7px, 1.5vh, 14px) 0 7px;
   color: var(--taupe);
 }
 
@@ -359,44 +374,53 @@ p {
   content: "";
   height: 1px;
   flex: 1;
-  background: var(--sand);
+  background: linear-gradient(90deg, transparent, var(--sand));
 }
 
-.card-divider span {
-  font-size: 13px;
+.card-divider::after {
+  background: linear-gradient(90deg, var(--sand), transparent);
 }
+
+.card-divider span { font-size: 13px; }
 
 .card-date {
   color: var(--taupe);
-  font-size: 8px;
-  letter-spacing: 1.5px;
+  font-size: clamp(7px, 1.5vw, 9px);
+  letter-spacing: clamp(1px, .25vw, 2px);
+  line-height: 1.5;
 }
+
+/* Bolsillo frontal del sobre */
 
 .envelope-pocket {
   position: absolute;
   z-index: 4;
   inset: 0;
   overflow: hidden;
-  background: linear-gradient(150deg, #E9D7BD, #D6C0A0);
-  clip-path: polygon(0 0, 50% 58%, 100% 0, 100% 100%, 0 100%);
-  border: 1px solid rgba(116,84,59,.35);
+  background:
+    linear-gradient(30deg, rgba(255,252,247,.22), transparent 45%),
+    linear-gradient(150deg, #E9D8BE, #D1B791);
+  clip-path: polygon(0 0, 50% 57%, 100% 0, 100% 100%, 0 100%);
+  border: 1px solid rgba(116,84,59,.4);
 }
 
 .envelope-pocket::before {
   content: "";
   position: absolute;
   inset: 9px;
-  border: 1px solid rgba(116,84,59,.28);
-  clip-path: polygon(0 0, 50% 58%, 100% 0, 100% 100%, 0 100%);
+  border: 1px solid rgba(116,84,59,.32);
+  clip-path: polygon(0 0, 50% 57%, 100% 0, 100% 100%, 0 100%);
 }
 
 .envelope-pocket::after {
   content: "";
   position: absolute;
   inset: 0;
-  background: linear-gradient(35deg, rgba(255,252,247,.25), transparent 55%);
+  background: linear-gradient(35deg, rgba(255,252,247,.24), transparent 55%);
   pointer-events: none;
 }
+
+/* Solapa superior */
 
 .envelope-flap {
   position: absolute;
@@ -408,32 +432,36 @@ p {
   transform-origin: top center;
   transform: rotateX(0deg);
   clip-path: polygon(0 0, 100% 0, 50% 100%);
-  background: linear-gradient(145deg, #F6EBDD, #D1B995);
-  transition: transform .9s cubic-bezier(.4,0,.2,1);
+  background:
+    linear-gradient(135deg, rgba(255,252,247,.55), transparent 60%),
+    linear-gradient(145deg, #F7EDDE, #CDB18A);
+  transition: transform .95s cubic-bezier(.4,0,.2,1);
   backface-visibility: visible;
 }
 
 .envelope-flap::before {
   content: "";
   position: absolute;
-  top: 7px;
-  right: 7px;
-  left: 7px;
-  height: 90%;
-  border: 1px solid rgba(116,84,59,.28);
+  top: 8px;
+  right: 8px;
+  left: 8px;
+  height: 88%;
+  border: 1px solid rgba(116,84,59,.32);
   clip-path: polygon(0 0, 100% 0, 50% 100%);
 }
 
 .flap-ornament {
   position: absolute;
-  top: 35px;
+  top: 24%;
   left: 0;
   width: 100%;
-  color: rgba(116,84,59,.8);
+  color: rgba(116,84,59,.85);
   font-family: var(--serif);
-  font-size: 32px;
+  font-size: clamp(28px, 6vw, 38px);
   text-align: center;
 }
+
+/* Sello de cera */
 
 .envelope-seal {
   position: absolute;
@@ -441,25 +469,27 @@ p {
   top: 49%;
   left: 50%;
   display: flex;
-  width: 54px;
-  height: 54px;
+  width: clamp(48px, 12vw, 64px);
+  aspect-ratio: 1;
   align-items: center;
   justify-content: center;
   transform: translate(-50%, -50%);
   border: 2px solid #D2B68A;
   border-radius: 50%;
-  outline: 1px solid rgba(255,252,247,.7);
+  outline: 1px solid rgba(255,252,247,.65);
   outline-offset: -6px;
-  background: radial-gradient(circle at 35% 28%, #8C6B4D, #493326 78%);
+  background:
+    radial-gradient(circle at 32% 25%, #9C7957, #493326 76%);
   color: #F8F2E8;
-  box-shadow: 0 3px 8px rgba(73,51,38,.22);
+  box-shadow: 0 4px 10px rgba(73,51,38,.28);
   transition: opacity .4s ease, transform .5s ease;
 }
 
 .envelope-seal span {
   font-family: var(--serif);
-  font-size: 27px;
+  font-size: clamp(25px, 5vw, 32px);
   font-style: italic;
+  line-height: 1;
 }
 
 .envelope-seal i {
@@ -471,69 +501,51 @@ p {
   font-style: normal;
 }
 
+/* Esquinas ornamentales */
+
 .envelope-corner {
   position: absolute;
   z-index: 7;
-  width: 22px;
-  height: 22px;
-  border-color: rgba(116,84,59,.65);
+  width: 24px;
+  height: 24px;
+  border-color: rgba(116,84,59,.72);
   border-style: solid;
   pointer-events: none;
 }
 
-.corner-tl {
-  top: 8px;
-  left: 8px;
-  border-width: 1px 0 0 1px;
-}
-
-.corner-tr {
-  top: 8px;
-  right: 8px;
-  border-width: 1px 1px 0 0;
-}
-
-.corner-bl {
-  bottom: 8px;
-  left: 8px;
-  border-width: 0 0 1px 1px;
-}
-
-.corner-br {
-  right: 8px;
-  bottom: 8px;
-  border-width: 0 1px 1px 0;
-}
+.corner-tl { top: 8px; left: 8px; border-width: 1px 0 0 1px; }
+.corner-tr { top: 8px; right: 8px; border-width: 1px 1px 0 0; }
+.corner-bl { bottom: 8px; left: 8px; border-width: 0 0 1px 1px; }
+.corner-br { right: 8px; bottom: 8px; border-width: 0 1px 1px 0; }
 
 .envelope-instruction {
-  margin: 30px 0 0;
+  margin: clamp(26px, 4vh, 42px) 0 0;
   color: var(--coffee);
   font-family: var(--serif);
-  font-size: 21px;
+  font-size: clamp(19px, 3.5vw, 24px);
   font-style: italic;
+  line-height: 1.4;
   transition: opacity .3s ease;
 }
 
 .envelope-bottom-ornament {
-  margin-top: 16px;
+  margin-top: 18px;
   color: var(--taupe);
   font-family: var(--serif);
   font-size: 14px;
-  letter-spacing: 4px;
+  letter-spacing: 5px;
 }
 
 .envelope-scene:hover .envelope {
   transform: translateY(-4px);
-  filter: drop-shadow(0 29px 26px rgba(73,51,38,.2));
+  filter: drop-shadow(0 29px 26px rgba(73,51,38,.23));
 }
 
 .envelope-scene:hover .envelope-seal {
   transform: translate(-50%, -50%) scale(1.06);
 }
 
-.envelope-scene.is-opening {
-  pointer-events: none;
-}
+.envelope-scene.is-opening { pointer-events: none; }
 
 .envelope-scene.is-opening .envelope-flap {
   transform: rotateX(180deg);
@@ -545,7 +557,7 @@ p {
 }
 
 .envelope-scene.is-opening .envelope-card {
-  transform: translateY(-145px);
+  transform: translateY(-115%);
 }
 
 .envelope-scene.is-opening .envelope {
@@ -556,15 +568,14 @@ p {
   opacity: 0;
 }
 
+@keyframes scene-arrive {
+  from { opacity: 0; transform: translateY(14px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
 @keyframes envelope-arrive {
-  from {
-    opacity: 0;
-    transform: translateY(25px) scale(.96);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-  }
+  from { opacity: 0; transform: translateY(25px) scale(.96); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
 }
 
 @keyframes envelope-open-float {
@@ -603,26 +614,19 @@ p {
   position: absolute;
   z-index: -1;
   inset: 0;
-  background: linear-gradient(
-    180deg,
-    rgba(36, 23, 15, .40),
-    rgba(36, 23, 15, .20) 35%,
-    rgba(36, 23, 15, .70)
-  );
+  background: linear-gradient(180deg, rgba(36,23,15,.40), rgba(36,23,15,.20) 35%, rgba(36,23,15,.70));
 }
 
 .hero-frame {
   width: min(100%, 720px);
   padding: 42px 24px;
-  border: 1px solid rgba(248, 242, 232, .75);
-  outline: 1px solid rgba(248, 242, 232, .40);
+  border: 1px solid rgba(248,242,232,.75);
+  outline: 1px solid rgba(248,242,232,.40);
   outline-offset: 7px;
   text-align: center;
 }
 
-.hero .eyebrow {
-  color: #F0DDBE;
-}
+.hero .eyebrow { color: #F0DDBE; }
 
 .hero h1 {
   margin: 8px 0;
@@ -647,30 +651,17 @@ p {
 .hero-description {
   max-width: 390px;
   margin: 0 auto 26px;
-  color: rgba(255, 252, 247, .92);
+  color: rgba(255,252,247,.92);
   font-size: 12px;
 }
 
-.hero .ornament {
-  color: #F0DDBE;
-}
-
-.hero .ornament::before,
-.hero .ornament::after {
-  background: rgba(240, 221, 190, .65);
-}
+.hero .ornament { color: #F0DDBE; }
+.hero .ornament::before, .hero .ornament::after { background: rgba(240,221,190,.65); }
 
 /* MENSAJE */
 
-.intro {
-  background: var(--ivory);
-  text-align: center;
-}
-
-.intro-copy {
-  max-width: 720px;
-  margin-inline: auto;
-}
+.intro { background: var(--ivory); text-align: center; }
+.intro-copy { max-width: 720px; margin-inline: auto; }
 
 .intro-copy p {
   font-family: var(--serif);
@@ -687,13 +678,11 @@ p {
 
 /* FAMILIA */
 
-.family {
-  background: var(--white);
-}
+.family { background: var(--white); }
 
 .family-grid {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(3, minmax(0,1fr));
   gap: 20px;
 }
 
@@ -717,31 +706,20 @@ p {
   font-size: 22px;
 }
 
-.family-card .eyebrow {
-  margin-bottom: 12px;
-}
-
-.family-card h3 {
-  font-size: 1.6rem;
-}
-
-.family-card p {
-  margin: 0;
-  font-size: 12px;
-}
+.family-card .eyebrow { margin-bottom: 12px; }
+.family-card h3 { font-size: 1.6rem; }
+.family-card p { margin: 0; font-size: 12px; }
 
 /* CUENTA REGRESIVA */
 
-.countdown-section {
-  background: var(--cream);
-}
+.countdown-section { background: var(--cream); }
 
 .countdown-layout {
   display: grid;
-  grid-template-columns: minmax(0, .95fr) minmax(0, 1.05fr);
+  grid-template-columns: minmax(0,.95fr) minmax(0,1.05fr);
   align-items: center;
-  gap: clamp(28px, 6vw, 75px);
-  width: min(100%, 1000px);
+  gap: clamp(28px,6vw,75px);
+  width: min(100%,1000px);
   margin-inline: auto;
 }
 
@@ -750,7 +728,6 @@ p {
   min-width: 0;
   padding: 9px;
   border: 1px solid var(--sand);
-  background: transparent;
 }
 
 .countdown-photo img {
@@ -760,14 +737,11 @@ p {
   object-position: center;
 }
 
-.countdown-copy {
-  min-width: 0;
-  text-align: center;
-}
+.countdown-copy { min-width: 0; text-align: center; }
 
 .countdown-copy h2 {
   margin-bottom: 10px;
-  font-size: clamp(2.4rem, 5vw, 4rem);
+  font-size: clamp(2.4rem,5vw,4rem);
 }
 
 .countdown-title {
@@ -777,7 +751,7 @@ p {
   background: transparent;
   box-shadow: none;
   font-family: var(--serif);
-  font-size: clamp(1.8rem, 4vw, 2.8rem);
+  font-size: clamp(1.8rem,4vw,2.8rem);
   font-weight: 500;
   line-height: 1.1;
 }
@@ -799,7 +773,7 @@ p {
 
 .countdown {
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-columns: repeat(4,minmax(0,1fr));
   gap: 8px;
   margin: 24px 0;
 }
@@ -814,7 +788,7 @@ p {
 .time-box strong {
   display: block;
   font-family: var(--serif);
-  font-size: clamp(1.7rem, 4vw, 2.6rem);
+  font-size: clamp(1.7rem,4vw,2.6rem);
   font-weight: 500;
   line-height: 1.15;
 }
@@ -836,13 +810,11 @@ p {
 
 /* UBICACIONES */
 
-.locations {
-  background: var(--ivory);
-}
+.locations { background: var(--ivory); }
 
 .location-grid {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: repeat(2,minmax(0,1fr));
   gap: 24px;
 }
 
@@ -869,9 +841,7 @@ p {
   color: var(--leather);
 }
 
-.location-card h3 {
-  font-size: 2rem;
-}
+.location-card h3 { font-size: 2rem; }
 
 .location-time {
   margin: 0 0 15px;
@@ -887,20 +857,15 @@ p {
   line-height: 1.9;
 }
 
-.location-card .btn {
-  width: 100%;
-  margin-top: auto;
-}
+.location-card .btn { width: 100%; margin-top: auto; }
 
 /* ITINERARIO */
 
-.itinerary-section {
-  background: var(--white);
-}
+.itinerary-section { background: var(--white); }
 
 .timeline {
   position: relative;
-  width: min(100%, 760px);
+  width: min(100%,760px);
   margin: 0 auto;
 }
 
@@ -917,7 +882,7 @@ p {
 .timeline-item {
   position: relative;
   display: grid;
-  grid-template-columns: 105px 38px minmax(0, 1fr);
+  grid-template-columns: 105px 38px minmax(0,1fr);
   align-items: center;
   gap: 16px;
   padding: 18px 0;
@@ -953,9 +918,7 @@ p {
   stroke-linejoin: round;
 }
 
-.timeline-desc {
-  min-width: 0;
-}
+.timeline-desc { min-width: 0; }
 
 .timeline-desc strong {
   display: block;
@@ -975,15 +938,13 @@ p {
 
 /* VESTIMENTA */
 
-.dress-code {
-  background: var(--cream);
-}
+.dress-code { background: var(--cream); }
 
 .dress-layout {
   display: grid;
-  grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr);
+  grid-template-columns: minmax(0,.9fr) minmax(0,1.1fr);
   align-items: center;
-  gap: clamp(28px, 6vw, 65px);
+  gap: clamp(28px,6vw,65px);
 }
 
 .dress-photo {
@@ -999,18 +960,9 @@ p {
   object-position: center;
 }
 
-.dress-copy {
-  min-width: 0;
-}
-
-.dress-copy h2 {
-  margin-bottom: 14px;
-}
-
-.dress-description {
-  color: var(--taupe);
-  font-size: 12px;
-}
+.dress-copy { min-width: 0; }
+.dress-copy h2 { margin-bottom: 14px; }
+.dress-description { color: var(--taupe); font-size: 12px; }
 
 .palette-heading {
   margin: 25px 0 16px;
@@ -1027,17 +979,14 @@ p {
   align-items: flex-start;
 }
 
-.swatch {
-  width: 62px;
-  text-align: center;
-}
+.swatch { width: 62px; text-align: center; }
 
 .swatch-circle {
   display: block;
   width: 48px;
   height: 48px;
   margin: 0 auto 8px;
-  border: 1px solid rgba(73, 51, 38, .15);
+  border: 1px solid rgba(73,51,38,.15);
   border-radius: 50%;
 }
 
@@ -1072,17 +1021,13 @@ p {
   display: block;
   color: var(--coffee);
   font-family: var(--serif);
-  font-size: clamp(1.65rem, 3vw, 2.2rem);
+  font-size: clamp(1.65rem,3vw,2.2rem);
   font-weight: 700;
   line-height: 1.12;
   letter-spacing: .3px;
 }
 
-.dress-warning p {
-  margin: 9px 0 0;
-  font-size: 12px;
-  line-height: 1.7;
-}
+.dress-warning p { margin: 9px 0 0; font-size: 12px; line-height: 1.7; }
 
 /* CONFIRMACIÓN */
 
@@ -1092,18 +1037,13 @@ p {
   text-align: center;
 }
 
-.rsvp .eyebrow {
-  color: var(--sand);
-}
-
-.rsvp h2 {
-  color: var(--white);
-}
+.rsvp .eyebrow { color: var(--sand); }
+.rsvp h2 { color: var(--white); }
 
 .rsvp p {
   max-width: 480px;
   margin: 0 auto 22px;
-  color: rgba(255, 252, 247, .8);
+  color: rgba(255,252,247,.8);
   font-size: 12px;
 }
 
@@ -1114,23 +1054,15 @@ p {
   font-size: 1.6rem;
 }
 
-.rsvp .ornament {
-  color: var(--sand);
-}
-
-.rsvp .ornament::before,
-.rsvp .ornament::after {
-  background: var(--taupe);
-}
+.rsvp .ornament { color: var(--sand); }
+.rsvp .ornament::before, .rsvp .ornament::after { background: var(--taupe); }
 
 /* GALERÍA */
 
-.gallery-section {
-  background: var(--ivory);
-}
+.gallery-section { background: var(--ivory); }
 
 .gallery-frame {
-  width: min(100%, 780px);
+  width: min(100%,780px);
   margin: 0 auto;
 }
 
@@ -1182,9 +1114,7 @@ p {
   font-size: 22px;
 }
 
-.gallery-controls button:hover {
-  background: var(--cream);
-}
+.gallery-controls button:hover { background: var(--cream); }
 
 .gallery-counter {
   min-width: 70px;
@@ -1195,16 +1125,13 @@ p {
 
 /* MENSAJE FINAL */
 
-.closing {
-  background: var(--white);
-  text-align: center;
-}
+.closing { background: var(--white); text-align: center; }
 
 .closing-quote {
   max-width: 800px;
   margin: 0 auto 24px;
   font-family: var(--serif);
-  font-size: clamp(1.6rem, 3.5vw, 2.6rem);
+  font-size: clamp(1.6rem,3.5vw,2.6rem);
   line-height: 1.5;
 }
 
@@ -1231,7 +1158,7 @@ footer a {
   text-underline-offset: 4px;
 }
 
-/* BOTÓN DE MÚSICA DISCRETO */
+/* BOTÓN DE MÚSICA */
 
 .music-indicator {
   position: fixed;
@@ -1244,48 +1171,47 @@ footer a {
   place-items: center;
   border: 1px solid var(--sand);
   border-radius: 50%;
-  background: rgba(248, 242, 232, .95);
+  background: rgba(248,242,232,.95);
   color: var(--coffee);
   cursor: pointer;
-  box-shadow: 0 3px 12px rgba(73, 51, 38, .08);
+  box-shadow: 0 3px 12px rgba(73,51,38,.08);
 }
 
-.music-indicator span {
-  font-size: 15px;
-}
+.music-indicator span { font-size: 15px; }
 
-/* RESPONSIVE */
+/* TABLET Y CELULAR */
 
 @media (max-width: 760px) {
-  section {
-    padding: 66px 20px;
-  }
+  section { padding: 66px 20px; }
 
   .envelope-intro {
-    padding: 20px;
+    padding:
+      max(28px, env(safe-area-inset-top))
+      22px
+      max(28px, env(safe-area-inset-bottom));
   }
+
+  .envelope-intro::before { inset: 10px; }
+  .envelope-intro::after { inset: 16px; }
+
+  .envelope-scene {
+    width: min(100%, 540px);
+    padding: 20px 0;
+  }
+
+  .envelope-kicker { margin-bottom: 30px; }
 
   .envelope {
-    width: min(100%, 350px);
-    height: 245px;
-  }
-
-  .envelope-card {
-    height: 222px;
-  }
-
-  .card-title {
-    font-size: 26px;
-  }
-
-  .card-name {
-    font-size: clamp(29px, 9vw, 39px);
+    width: min(100%, 390px);
+    aspect-ratio: 1.48 / 1;
   }
 
   .envelope-instruction {
-    margin-top: 26px;
-    font-size: 19px;
+    margin-top: 30px;
+    font-size: clamp(18px,4.5vw,22px);
   }
+
+  .envelope-bottom-ornament { margin-top: 14px; }
 
   .hero {
     min-height: 100svh;
@@ -1299,210 +1225,177 @@ footer a {
     outline-offset: 4px;
   }
 
-  .hero h1 {
-    font-size: clamp(3.2rem, 13vw, 5.4rem);
-  }
+  .hero h1 { font-size: clamp(3.2rem,13vw,5.4rem); }
+  .hero-date { line-height: 1.9; }
 
-  .hero-date {
-    line-height: 1.9;
-  }
+  .family-grid { grid-template-columns: 1fr; gap: 14px; }
+  .family-card { padding: 25px 18px; }
 
-  .family-grid {
-    grid-template-columns: 1fr;
-    gap: 14px;
-  }
-
-  .family-card {
-    padding: 25px 18px;
-  }
-
-  .countdown-layout,
-  .dress-layout {
-    grid-template-columns: minmax(0, 1fr);
+  .countdown-layout, .dress-layout {
+    grid-template-columns: minmax(0,1fr);
     gap: 30px;
   }
 
-  .countdown-photo,
-  .dress-photo {
-    width: min(100%, 430px);
+  .countdown-photo, .dress-photo {
+    width: min(100%,430px);
     margin-inline: auto;
   }
 
-  .countdown-photo img,
-  .dress-photo img {
-    aspect-ratio: 4 / 5;
-  }
+  .countdown-photo img, .dress-photo img { aspect-ratio: 4 / 5; }
 
-  .countdown-copy h2 {
-    font-size: clamp(2.4rem, 10vw, 3.5rem);
-  }
+  .countdown-copy h2 { font-size: clamp(2.4rem,10vw,3.5rem); }
+  .countdown-title { font-size: clamp(2rem,8vw,2.7rem); }
 
-  .countdown-title {
-    font-size: clamp(2rem, 8vw, 2.7rem);
-  }
+  .location-grid { grid-template-columns: 1fr; gap: 16px; }
+  .location-card { padding: 27px 22px; }
 
-  .location-grid {
-    grid-template-columns: 1fr;
-    gap: 16px;
-  }
-
-  .location-card {
-    padding: 27px 22px;
-  }
-
-  .timeline {
-    width: 100%;
-  }
-
-  .timeline::before {
-    left: 83px;
-  }
+  .timeline { width: 100%; }
+  .timeline::before { left: 83px; }
 
   .timeline-item {
-    grid-template-columns: 66px 26px minmax(0, 1fr);
+    grid-template-columns: 66px 26px minmax(0,1fr);
     gap: 9px;
     padding: 16px 0;
   }
 
-  .timeline-time {
-    font-size: 1.05rem;
-  }
+  .timeline-time { font-size: 1.05rem; }
 
-  .timeline-icon {
-    width: 26px;
-    height: 26px;
-  }
+  .timeline-icon { width: 26px; height: 26px; }
+  .timeline-icon svg { width: 14px; height: 14px; }
+  .timeline-desc strong { font-size: 1.45rem; }
+  .timeline-desc small { font-size: 10px; }
 
-  .timeline-icon svg {
-    width: 14px;
-    height: 14px;
-  }
+  .dress-copy h2 { font-size: clamp(2.5rem,10vw,3.5rem); }
+  .palette { gap: 14px 10px; }
+  .swatch { width: 56px; }
+  .swatch-circle { width: 43px; height: 43px; }
 
-  .timeline-desc strong {
-    font-size: 1.45rem;
-  }
-
-  .timeline-desc small {
-    font-size: 10px;
-  }
-
-  .dress-copy h2 {
-    font-size: clamp(2.5rem, 10vw, 3.5rem);
-  }
-
-  .palette {
-    gap: 14px 10px;
-  }
-
-  .swatch {
-    width: 56px;
-  }
-
-  .swatch-circle {
-    width: 43px;
-    height: 43px;
-  }
-
-  .dress-warning strong {
-    font-size: clamp(1.7rem, 7vw, 2.15rem);
-  }
+  .dress-warning strong { font-size: clamp(1.7rem,7vw,2.15rem); }
 
   .gallery-stage {
     min-height: 220px;
     aspect-ratio: 4 / 5;
   }
 
-  .gallery-image {
-    object-fit: contain;
-  }
+  .gallery-image { object-fit: contain; }
 }
 
-@media (max-width: 380px) {
-  section {
-    padding: 55px 16px;
+/* CELULARES PEQUEÑOS */
+
+@media (max-width: 420px) {
+  .envelope-intro {
+    padding-right: 23px;
+    padding-left: 23px;
   }
 
-  .hero {
-    padding: 24px 18px;
+  .envelope-scene { padding: 15px 0; }
+
+  .envelope-kicker {
+    margin-bottom: 25px;
+    font-size: 8px;
+    letter-spacing: 2px;
   }
 
-  .hero-frame {
-    padding: 28px 13px;
-  }
-
-  .hero h1 {
-    font-size: 3rem;
-  }
-
-  .countdown {
-    gap: 4px;
-  }
-
-  .time-box {
-    padding: 12px 1px;
-  }
-
-  .time-box span {
-    font-size: 7px;
-    letter-spacing: 0;
-  }
-
-  .timeline-item {
-    grid-template-columns: 60px 24px minmax(0, 1fr);
-    gap: 7px;
-  }
-
-  .timeline::before {
-    left: 74px;
-  }
-
-  .timeline-desc strong {
-    font-size: 1.3rem;
-  }
-
-  .swatch {
-    width: 52px;
-  }
-
-  .swatch-circle {
-    width: 39px;
-    height: 39px;
-  }
+  .envelope-kicker::before,
+  .envelope-kicker::after { margin-inline: 7px; }
 
   .envelope {
-    height: 225px;
+    width: 100%;
+    max-width: 340px;
   }
 
+  .envelope-back::before { inset: 8px; }
+  .envelope-back::after { inset: 13px; }
+
   .envelope-card {
-    height: 204px;
+    padding: 15px 10px;
+    outline-offset: -6px;
   }
 
   .card-top-ornament {
     margin-bottom: 7px;
+    font-size: 18px;
+    letter-spacing: 4px;
   }
 
-  .card-title {
-    font-size: 24px;
+  .card-title { font-size: clamp(23px,6vw,28px); }
+  .card-name { font-size: clamp(29px,8vw,37px); }
+
+  .card-divider { margin: 8px 0 5px; }
+  .card-date { letter-spacing: 1px; }
+
+  .envelope-corner { width: 18px; height: 18px; }
+
+  .envelope-instruction {
+    max-width: 290px;
+    margin: 27px auto 0;
+    font-size: 19px;
   }
 
-  .card-name {
-    font-size: 29px;
-  }
-
-  .card-divider {
-    margin: 8px 0 5px;
-  }
-
-  .envelope-seal {
-    width: 48px;
-    height: 48px;
+  .envelope-bottom-ornament {
+    margin-top: 13px;
+    font-size: 12px;
   }
 }
 
+@media (max-width: 380px) {
+  section { padding: 55px 16px; }
+
+  .hero { padding: 24px 18px; }
+  .hero-frame { padding: 28px 13px; }
+  .hero h1 { font-size: 3rem; }
+
+  .countdown { gap: 4px; }
+  .time-box { padding: 12px 1px; }
+  .time-box span { font-size: 7px; letter-spacing: 0; }
+
+  .timeline-item {
+    grid-template-columns: 60px 24px minmax(0,1fr);
+    gap: 7px;
+  }
+
+  .timeline::before { left: 74px; }
+  .timeline-desc strong { font-size: 1.3rem; }
+
+  .swatch { width: 52px; }
+  .swatch-circle { width: 39px; height: 39px; }
+
+  .envelope-intro { padding-inline: 22px; }
+  .envelope-kicker { margin-bottom: 23px; }
+
+  .envelope-card { padding-inline: 8px; }
+  .card-small { font-size: 7px; }
+  .card-title { font-size: 23px; }
+  .card-name { font-size: 29px; }
+  .card-divider { width: 75%; }
+
+  .envelope-seal { width: 47px; }
+}
+
+@media (max-height: 650px) {
+  .envelope-intro {
+    align-items: flex-start;
+    padding-top: max(22px, env(safe-area-inset-top));
+    padding-bottom: max(22px, env(safe-area-inset-bottom));
+  }
+
+  .envelope-scene { padding: 8px 0; }
+  .envelope-kicker { margin-bottom: 15px; }
+
+  .envelope {
+    width: min(76vw, 350px);
+  }
+
+  .envelope-instruction {
+    margin-top: 16px;
+    font-size: 18px;
+  }
+
+  .envelope-bottom-ornament { margin-top: 8px; }
+}
+
 @media (prefers-reduced-motion: reduce) {
-  *,
-  *::before,
-  *::after {
+  *, *::before, *::after {
     scroll-behavior: auto !important;
     transition-duration: .01ms !important;
     animation-duration: .01ms !important;
@@ -1561,10 +1454,9 @@ footer a {
   </div>
 </div>
 
-<!-- PORTADA: fotografía NATLI32.png -->
+<!-- PORTADA -->
 <section class="hero" id="inicio">
   <img class="hero-photo" src="NATLI32.png" alt="" fetchpriority="high">
-
   <div class="hero-frame">
     <p class="eyebrow">Una celebración muy especial</p>
     <div class="ornament" aria-hidden="true">♞ ✧ ♞</div>
@@ -1623,14 +1515,14 @@ footer a {
         <div class="family-symbol" aria-hidden="true">♧</div>
         <p class="eyebrow">Mis padrinos</p>
         <h3>Said Segura Jiménez</h3>
-        <p style="margin: 5px 0;">y</p>
+        <p style="margin:5px 0;">y</p>
         <h3>Ariadna Hernandez Pioquinto</h3>
       </article>
     </div>
   </div>
 </section>
 
-<!-- CUENTA REGRESIVA: fotografía NATLI38.png -->
+<!-- CUENTA REGRESIVA -->
 <section class="countdown-section" id="cuenta-regresiva">
   <div class="countdown-layout">
     <div class="countdown-photo">
@@ -1642,27 +1534,13 @@ footer a {
       <h2>Cuenta regresiva</h2>
       <p class="countdown-title">Una noche para recordar</p>
       <p class="countdown-date">7 · noviembre · 2026</p>
-      <p class="countdown-intro">
-        Falta poco para compartir una noche inolvidable.
-      </p>
+      <p class="countdown-intro">Falta poco para compartir una noche inolvidable.</p>
 
       <div class="countdown" id="countdown" aria-label="Tiempo restante">
-        <div class="time-box">
-          <strong id="days">00</strong>
-          <span>Días</span>
-        </div>
-        <div class="time-box">
-          <strong id="hours">00</strong>
-          <span>Horas</span>
-        </div>
-        <div class="time-box">
-          <strong id="minutes">00</strong>
-          <span>Minutos</span>
-        </div>
-        <div class="time-box">
-          <strong id="seconds">00</strong>
-          <span>Segundos</span>
-        </div>
+        <div class="time-box"><strong id="days">00</strong><span>Días</span></div>
+        <div class="time-box"><strong id="hours">00</strong><span>Horas</span></div>
+        <div class="time-box"><strong id="minutes">00</strong><span>Minutos</span></div>
+        <div class="time-box"><strong id="seconds">00</strong><span>Segundos</span></div>
       </div>
 
       <p class="countdown-closing">¡Nos vemos muy pronto!</p>
@@ -1690,11 +1568,7 @@ footer a {
           C. Río Rhin S/N, Col. Las Vegas,<br>
           C.P. 94297, Boca del Río, Veracruz.
         </p>
-        <a class="btn btn-outline"
-           href="https://maps.app.goo.gl/SDDv9FsMZULzLXfJ6?g_st=aw"
-           target="_blank" rel="noopener noreferrer">
-          Ver ubicación ↗
-        </a>
+        <a class="btn btn-outline" href="https://maps.app.goo.gl/SDDv9FsMZULzLXfJ6?g_st=aw" target="_blank" rel="noopener noreferrer">Ver ubicación ↗</a>
       </article>
 
       <article class="location-card">
@@ -1707,17 +1581,13 @@ footer a {
           Camino Real s/n, Villa de Guadalupe,<br>
           C.P. 94273, El Tejar, Medellín de Bravo, Ver.
         </p>
-        <a class="btn btn-outline"
-           href="https://maps.app.goo.gl/ZiFp9PCKzq1rMDfd9?g_st=aw"
-           target="_blank" rel="noopener noreferrer">
-          Ver ubicación ↗
-        </a>
+        <a class="btn btn-outline" href="https://maps.app.goo.gl/ZiFp9PCKzq1rMDfd9?g_st=aw" target="_blank" rel="noopener noreferrer">Ver ubicación ↗</a>
       </article>
     </div>
   </div>
 </section>
 
-<!-- ITINERARIO CON ICONOS LINEALES -->
+<!-- ITINERARIO -->
 <section class="itinerary-section" id="itinerario">
   <div class="container">
     <div class="section-heading">
@@ -1728,122 +1598,70 @@ footer a {
     </div>
 
     <div class="timeline">
-
       <div class="timeline-item">
         <div class="timeline-time">7:00 p.m.</div>
-        <div class="timeline-icon" aria-hidden="true">
-          <svg viewBox="0 0 24 24"><path d="M3 21h18M5 21V10h14v11M3 10l9-7 9 7M9 14v3M15 14v3"/></svg>
-        </div>
-        <div class="timeline-desc">
-          <strong>Santa misa</strong>
-          <small>Un momento de fe y gratitud.</small>
-        </div>
+        <div class="timeline-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3 21h18M5 21V10h14v11M3 10l9-7 9 7M9 14v3M15 14v3"/></svg></div>
+        <div class="timeline-desc"><strong>Santa misa</strong><small>Un momento de fe y gratitud.</small></div>
       </div>
 
       <div class="timeline-item">
         <div class="timeline-time">8:30 p.m.</div>
-        <div class="timeline-icon" aria-hidden="true">
-          <svg viewBox="0 0 24 24"><path d="M4 4h16M6 4l2 8a4 4 0 0 0 8 0l2-8M12 16v5M8 21h8"/></svg>
-        </div>
-        <div class="timeline-desc">
-          <strong>Recepción</strong>
-          <small>¡Bienvenidos a la celebración!</small>
-        </div>
+        <div class="timeline-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 4h16M6 4l2 8a4 4 0 0 0 8 0l2-8M12 16v5M8 21h8"/></svg></div>
+        <div class="timeline-desc"><strong>Recepción</strong><small>¡Bienvenidos a la celebración!</small></div>
       </div>
 
       <div class="timeline-item">
         <div class="timeline-time">9:00 p.m.</div>
-        <div class="timeline-icon" aria-hidden="true">
-          <svg viewBox="0 0 24 24"><path d="M12 3l2 5 5 2-5 2-2 5-2-5-5-2 5-2 2-5zM19 16l1.2 2.8L23 20l-2.8 1.2L19 24"/></svg>
-        </div>
-        <div class="timeline-desc">
-          <strong>Vals</strong>
-          <small>Un momento muy especial.</small>
-        </div>
+        <div class="timeline-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 3l2 5 5 2-5 2-2 5-2-5-5-2 5-2 2-5zM19 16l1.2 2.8L23 20l-2.8 1.2L19 24"/></svg></div>
+        <div class="timeline-desc"><strong>Vals</strong><small>Un momento muy especial.</small></div>
       </div>
 
       <div class="timeline-item">
         <div class="timeline-time">9:15 p.m.</div>
-        <div class="timeline-icon" aria-hidden="true">
-          <svg viewBox="0 0 24 24"><path d="M12 3a9 9 0 1 0 0 18 9 9 0 0 0 0-18zM8 10h.01M16 10h.01M8 14s1.5 3 4 3 4-3 4-3"/></svg>
-        </div>
-        <div class="timeline-desc">
-          <strong>Palabras de bienvenida</strong>
-          <small>Compartiremos la alegría de esta noche.</small>
-        </div>
+        <div class="timeline-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 3a9 9 0 1 0 0 18 9 9 0 0 0 0-18zM8 10h.01M16 10h.01M8 14s1.5 3 4 3 4-3 4-3"/></svg></div>
+        <div class="timeline-desc"><strong>Palabras de bienvenida</strong><small>Compartiremos la alegría de esta noche.</small></div>
       </div>
 
       <div class="timeline-item">
         <div class="timeline-time">9:30 p.m.</div>
-        <div class="timeline-icon" aria-hidden="true">
-          <svg viewBox="0 0 24 24"><path d="M8 21h8M12 17v4M7 3h10l-1 8a4 4 0 0 1-8 0L7 3zM7 6H4a3 3 0 0 0 3 5M17 6h3a3 3 0 0 1-3 5"/></svg>
-        </div>
-        <div class="timeline-desc">
-          <strong>Brindis</strong>
-          <small>Por los sueños y nuevos comienzos.</small>
-        </div>
+        <div class="timeline-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 21h8M12 17v4M7 3h10l-1 8a4 4 0 0 1-8 0L7 3zM7 6H4a3 3 0 0 0 3 5M17 6h3a3 3 0 0 1-3 5"/></svg></div>
+        <div class="timeline-desc"><strong>Brindis</strong><small>Por los sueños y nuevos comienzos.</small></div>
       </div>
 
       <div class="timeline-item">
         <div class="timeline-time">9:45 p.m.</div>
-        <div class="timeline-icon" aria-hidden="true">
-          <svg viewBox="0 0 24 24"><path d="M3 12h18M5 12l2 8h10l2-8M7 8h10M8 4v4M12 4v4M16 4v4"/></svg>
-        </div>
-        <div class="timeline-desc">
-          <strong>Cena</strong>
-          <small>Un momento para disfrutar juntos.</small>
-        </div>
+        <div class="timeline-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3 12h18M5 12l2 8h10l2-8M7 8h10M8 4v4M12 4v4M16 4v4"/></svg></div>
+        <div class="timeline-desc"><strong>Cena</strong><small>Un momento para disfrutar juntos.</small></div>
       </div>
 
       <div class="timeline-item">
         <div class="timeline-time">11:00 p.m.</div>
-        <div class="timeline-icon" aria-hidden="true">
-          <svg viewBox="0 0 24 24"><path d="M9 18V5l12-2v13M9 8l12-2M6 21a3 3 0 1 0 0-6 3 3 0 0 0 0 6zM18 19a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/></svg>
-        </div>
-        <div class="timeline-desc">
-          <strong>Música y baile</strong>
-          <small>¡A disfrutar la noche!</small>
-        </div>
+        <div class="timeline-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M9 18V5l12-2v13M9 8l12-2M6 21a3 3 0 1 0 0-6 3 3 0 0 0 0 6zM18 19a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/></svg></div>
+        <div class="timeline-desc"><strong>Música y baile</strong><small>¡A disfrutar la noche!</small></div>
       </div>
 
       <div class="timeline-item">
         <div class="timeline-time">3:30 a.m.</div>
-        <div class="timeline-icon" aria-hidden="true">
-          <svg viewBox="0 0 24 24"><path d="M4 10h16v11H4zM2 10h20M12 10v11M12 10c-5 0-7-2-5-4s5 1 5 4zM12 10c5 0 7-2 5-4s-5 1-5 4z"/></svg>
-        </div>
-        <div class="timeline-desc">
-          <strong>Corte de pastel</strong>
-          <small>Domingo 8 de noviembre.</small>
-        </div>
+        <div class="timeline-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 10h16v11H4zM2 10h20M12 10v11M12 10c-5 0-7-2-5-4s5 1 5 4zM12 10c5 0 7-2 5-4s-5 1-5 4z"/></svg></div>
+        <div class="timeline-desc"><strong>Corte de pastel</strong><small>Domingo 8 de noviembre.</small></div>
       </div>
 
       <div class="timeline-item">
         <div class="timeline-time">3:45 a.m.</div>
-        <div class="timeline-icon" aria-hidden="true">
-          <svg viewBox="0 0 24 24"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8l1.1 1.1L12 21l7.8-7.5 1.1-1.1a5.5 5.5 0 0 0-.1-7.8z"/></svg>
-        </div>
-        <div class="timeline-desc">
-          <strong>Recuerditos y despedida</strong>
-          <small>Gracias por acompañarme.</small>
-        </div>
+        <div class="timeline-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8l1.1 1.1L12 21l7.8-7.5 1.1-1.1a5.5 5.5 0 0 0-.1-7.8z"/></svg></div>
+        <div class="timeline-desc"><strong>Recuerditos y despedida</strong><small>Gracias por acompañarme.</small></div>
       </div>
 
       <div class="timeline-item">
         <div class="timeline-time">4:00 a.m.</div>
-        <div class="timeline-icon" aria-hidden="true">
-          <svg viewBox="0 0 24 24"><path d="M12 3v9M7 6a8 8 0 1 0 10 0"/></svg>
-        </div>
-        <div class="timeline-desc">
-          <strong>Fin del evento</strong>
-          <small>Nos llevamos recuerdos inolvidables.</small>
-        </div>
+        <div class="timeline-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 3v9M7 6a8 8 0 1 0 10 0"/></svg></div>
+        <div class="timeline-desc"><strong>Fin del evento</strong><small>Nos llevamos recuerdos inolvidables.</small></div>
       </div>
-
     </div>
   </div>
 </section>
 
-<!-- VESTIMENTA: fotografía NATLI23.png -->
+<!-- VESTIMENTA -->
 <section class="dress-code" id="vestimenta">
   <div class="container dress-layout">
     <div class="dress-photo">
@@ -1853,39 +1671,19 @@ footer a {
     <div class="dress-copy">
       <p class="eyebrow">Estilo Cielito Lindo</p>
       <h2>Elegante jardín</h2>
-      <p class="dress-description">
-        Un toque vaquero y mexicano será perfecto para celebrar
-        al estilo Cielito Lindo.
-      </p>
+      <p class="dress-description">Un toque vaquero y mexicano será perfecto para celebrar al estilo Cielito Lindo.</p>
 
       <p class="palette-heading">Colores sugeridos para tus prendas</p>
 
       <div class="palette">
-        <div class="swatch">
-          <span class="swatch-circle" style="background:#F8F2E8"></span>
-          <span>Marfil</span>
-        </div>
-        <div class="swatch">
-          <span class="swatch-circle" style="background:#D6C2A5"></span>
-          <span>Arena</span>
-        </div>
-        <div class="swatch">
-          <span class="swatch-circle" style="background:#9B8570"></span>
-          <span>Taupe</span>
-        </div>
-        <div class="swatch">
-          <span class="swatch-circle" style="background:#A47752"></span>
-          <span>Cuero</span>
-        </div>
-        <div class="swatch">
-          <span class="swatch-circle" style="background:#493326"></span>
-          <span>Café</span>
-        </div>
+        <div class="swatch"><span class="swatch-circle" style="background:#F8F2E8"></span><span>Marfil</span></div>
+        <div class="swatch"><span class="swatch-circle" style="background:#D6C2A5"></span><span>Arena</span></div>
+        <div class="swatch"><span class="swatch-circle" style="background:#9B8570"></span><span>Taupe</span></div>
+        <div class="swatch"><span class="swatch-circle" style="background:#A47752"></span><span>Cuero</span></div>
+        <div class="swatch"><span class="swatch-circle" style="background:#493326"></span><span>Café</span></div>
       </div>
 
-      <p class="dress-style-note">
-        Sombreros, botas y detalles mexicanos: ¡son bienvenidos!
-      </p>
+      <p class="dress-style-note">Sombreros, botas y detalles mexicanos: ¡son bienvenidos!</p>
 
       <div class="dress-warning">
         <p class="dress-warning-label">Una indicación especial</p>
@@ -1902,19 +1700,12 @@ footer a {
     <p class="eyebrow">Será un gusto contar contigo</p>
     <div class="ornament" aria-hidden="true">✧ ♞ ✧</div>
     <h2>Confirma tu asistencia</h2>
-    <p>
-      Ayúdanos a preparar esta noche tan especial
-      confirmando tu asistencia por WhatsApp.
-    </p>
-    <a class="btn btn-light"
-       href="https://wa.me/5212298521761"
-       target="_blank" rel="noopener noreferrer">
-      Confirmar por WhatsApp ↗
-    </a>
+    <p>Ayúdanos a preparar esta noche tan especial confirmando tu asistencia por WhatsApp.</p>
+    <a class="btn btn-light" href="https://wa.me/5212298521761" target="_blank" rel="noopener noreferrer">Confirmar por WhatsApp ↗</a>
   </div>
 </section>
 
-<!-- GALERÍA: NATLI1–NATLI40, excluyendo 23, 32 y 38 -->
+<!-- GALERÍA -->
 <section class="gallery-section" id="galeria">
   <div class="container">
     <div class="section-heading">
@@ -1926,15 +1717,8 @@ footer a {
 
     <div class="gallery-frame">
       <div class="gallery-stage" id="gallery-stage">
-        <p class="gallery-empty" id="gallery-message">
-          Cargando recuerdos de Natali…
-        </p>
-        <img
-          class="gallery-image"
-          id="gallery-image"
-          alt="Recuerdo de Natali Gissel"
-          hidden
-        >
+        <p class="gallery-empty" id="gallery-message">Cargando recuerdos de Natali…</p>
+        <img class="gallery-image" id="gallery-image" alt="Recuerdo de Natali Gissel" hidden>
       </div>
 
       <div class="gallery-controls">
@@ -1968,16 +1752,9 @@ footer a {
   <a href="#inicio">Volver al inicio ↑</a>
 </footer>
 
-<!-- Música: se activa al abrir el sobre -->
 <audio id="background-music" src="music.mp3" loop preload="none"></audio>
 
-<button
-  class="music-indicator"
-  id="music-toggle"
-  type="button"
-  aria-label="Activar música"
-  title="Activar o pausar música"
->
+<button class="music-indicator" id="music-toggle" type="button" aria-label="Activar música" title="Activar o pausar música">
   <span id="music-symbol" aria-hidden="true">♫</span>
 </button>
 
@@ -1992,12 +1769,10 @@ footer a {
   const symbol = document.getElementById("music-symbol");
 
   let isOpening = false;
-  let started = false;
 
   async function playMusic() {
     try {
       await audio.play();
-      started = true;
       symbol.textContent = "♫";
       button.setAttribute("aria-label", "Pausar música");
     } catch (error) {
@@ -2013,7 +1788,7 @@ footer a {
     scene.classList.add("is-opening");
     instruction.textContent = "Con cariño, Natali Gissel";
 
-    /* La reproducción se intenta durante el toque del usuario */
+    /* Intenta reproducir la música con la interacción del usuario */
     playMusic();
 
     window.setTimeout(function () {
@@ -2046,7 +1821,6 @@ footer a {
   });
 
   audio.addEventListener("play", function () {
-    started = true;
     symbol.textContent = "♫";
     button.setAttribute("aria-label", "Pausar música");
   });
@@ -2097,6 +1871,7 @@ footer a {
 (function () {
   const excluded = new Set([23, 32, 38]);
   const extensions = [".png", ".jpg", ".jpeg", ".PNG", ".JPG", ".JPEG"];
+
   const imageNumbers = Array.from({ length: 40 }, function (_, i) {
     return i + 1;
   }).filter(function (number) {
@@ -2138,8 +1913,7 @@ footer a {
     if (!availableImages.length) {
       imageElement.hidden = true;
       message.hidden = false;
-      message.textContent =
-        "No se encontraron fotografías para la galería. Revisa los nombres de los archivos.";
+      message.textContent = "No se encontraron fotografías para la galería. Revisa los nombres de los archivos.";
       counter.textContent = "0 / 0";
       previousButton.disabled = true;
       nextButton.disabled = true;
@@ -2153,8 +1927,7 @@ footer a {
 
     imageElement.hidden = false;
     message.hidden = true;
-    counter.textContent =
-      (currentIndex + 1) + " / " + availableImages.length;
+    counter.textContent = (currentIndex + 1) + " / " + availableImages.length;
 
     previousButton.disabled = availableImages.length < 2;
     nextButton.disabled = availableImages.length < 2;
